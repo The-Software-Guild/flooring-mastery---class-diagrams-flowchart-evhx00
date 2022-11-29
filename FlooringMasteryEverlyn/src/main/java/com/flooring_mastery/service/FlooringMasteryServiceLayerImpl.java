@@ -74,7 +74,7 @@ public class FlooringMasteryServiceLayerImpl implements FlooringMasteryServiceLa
     
     @Override
     public List<String> getAllStateAB() throws FlooringMasteryPersistenceException{
-        return dao.getAllStateAB();
+        return dao.getAllStateTax();
     }
     
     public List<String> getAllStates() throws FlooringMasteryPersistenceException{

@@ -28,19 +28,20 @@ public interface FlooringMasteryDAO {
     
     Tax getTax(String stateAB) throws FlooringMasteryPersistenceException;
     
-    List<String> getAllStateAB() throws FlooringMasteryPersistenceException;
+    List<String> getAllStateTax() throws FlooringMasteryPersistenceException;
     
     List<String> getAllStates() throws FlooringMasteryPersistenceException;
     
     Product getProduct(String productType) throws FlooringMasteryPersistenceException;
     
     List<String> getAllProductTypes() throws FlooringMasteryPersistenceException;
-    
-    Order removeOrder(String orderNumber, String fileName) throws FlooringMasteryPersistenceException;
-    
-    Order calculateOrderInfo(Order prevOrder, Tax specificTax, Product specificProduct);
 
     void editOrder(Order editOrder, ArrayList<String> newValues, String fileName) throws FlooringMasteryPersistenceException;
-    
+
+    Order calculateOrderInfo(Order prevOrder, Tax specificTax, Product specificProduct);
+
     String generateNextOrderNumber(String fileName) throws FlooringMasteryPersistenceException;
+
+    Order removeOrder(String orderNumber, String fileName) throws FlooringMasteryPersistenceException;
+
 }

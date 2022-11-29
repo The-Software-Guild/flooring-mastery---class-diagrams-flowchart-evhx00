@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/FlooringMasteryEverlyn/FlooringMasteryEverlyn.iml" filepath="$PROJECT_DIR$/FlooringMasteryEverlyn/FlooringMasteryEverlyn.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/flooring-mastery---class-diagrams-flowchart-evhx00.iml" filepath="$PROJECT_DIR$/.idea/flooring-mastery---class-diagrams-flowchart-evhx00.iml" />
     </modules>
   </component>

@@ -52,11 +52,11 @@ public class FlooringMasteryDAOFileImpl implements FlooringMasteryDAO {
     @Override
     public void addOrder(String orderNumber, Order order, String fileName) throws FlooringMasteryPersistenceException {
            ArrayList<File> files = getAllFiles();
-           Order prevOrder;
+           Order prev;
             for(File file: files){
                 if(file.getName().contains(fileName)){
                      loadRoster(fileName);
-                     prevOrder = orders.put(orderNumber,order);
+                     prev = orders.put(orderNumber,order);
                      write(fileName);
                      return;
                 }
@@ -64,7 +64,7 @@ public class FlooringMasteryDAOFileImpl implements FlooringMasteryDAO {
 
             File newFile = new File(fileName);
             files.add(newFile);
-            prevOrder = orders.put(orderNumber,order);
+            prev = orders.put(orderNumber,order);
             write(fileName);
     }
 
@@ -87,11 +87,11 @@ public class FlooringMasteryDAOFileImpl implements FlooringMasteryDAO {
     }
 
     @Override
-    public List<String> getAllStateAB() throws FlooringMasteryPersistenceException{
+    public List<String> getAllStateTax() throws FlooringMasteryPersistenceException{
         loadTaxes();
         ArrayList<String> states = new ArrayList<>();
-        List<Tax> tList = getAllTaxes();
-        for(Tax tax: tList){
+        List<Tax> list = getAllTaxes();
+        for(Tax tax: list){
             states.add(tax.getStateAbbreviation());
         }
         return states;
@@ -113,8 +113,8 @@ public class FlooringMasteryDAOFileImpl implements FlooringMasteryDAO {
     public List<String> getAllStates() throws FlooringMasteryPersistenceException{
         loadTaxes();
         ArrayList<String> states = new ArrayList<>();
-        List<Tax> tList = getAllTaxes();
-        for(Tax tax: tList){
+        List<Tax> list = getAllTaxes();
+        for(Tax tax: list){
             states.add(tax.getStateName());
         }
         return states;
@@ -124,8 +124,8 @@ public class FlooringMasteryDAOFileImpl implements FlooringMasteryDAO {
     public List<String> getAllProductTypes() throws FlooringMasteryPersistenceException{
         loadProducts();
         ArrayList<String> pType = new ArrayList<>();
-        List<Product> pList = getAllProducts();
-        for(Product p: pList){
+        List<Product> list = getAllProducts();
+        for(Product p: list){
             pType.add(p.getProductType());
         }
         return pType;

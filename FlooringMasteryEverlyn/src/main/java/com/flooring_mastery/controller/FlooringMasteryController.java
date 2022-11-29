@@ -113,8 +113,8 @@ public class FlooringMasteryController {
         String orderID = view.getOrderIdChoice();
         Order order = service.getOrder(orderID,date);
 
-        boolean result2 = view.displayEditResult(order);
-        if(result2){
+        boolean bool = view.displayEditResult(order);
+        if(bool){
             ArrayList<String> newValues = view.editMenu(order.getCustomerName(), order.getState(),order.getProductType(),order.getArea());
             service.editOrder(order, newValues, date);
             view.displayOrder(order);
