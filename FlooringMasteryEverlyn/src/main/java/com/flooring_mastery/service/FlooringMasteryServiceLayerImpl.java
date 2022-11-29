@@ -7,8 +7,8 @@ import com.flooring_mastery.dao.FlooringMasteryPersistenceException;
 import com.flooring_mastery.model.Order;
 import com.flooring_mastery.model.Product;
 import com.flooring_mastery.model.Tax;
+
 import java.io.File;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,11 +72,6 @@ public class FlooringMasteryServiceLayerImpl implements FlooringMasteryServiceLa
         return dao.getAllTaxes();
     }
     
-    @Override
-    public List<String> getAllStateAB() throws FlooringMasteryPersistenceException{
-        return dao.getAllStateTax();
-    }
-    
     public List<String> getAllStates() throws FlooringMasteryPersistenceException{
         return dao.getAllStates();
     }
@@ -106,37 +101,5 @@ public class FlooringMasteryServiceLayerImpl implements FlooringMasteryServiceLa
     public String generateNextOrderNumber(String fileName) throws FlooringMasteryPersistenceException{
         return dao.generateNextOrderNumber(fileName);
     }
-
-    private void validateOrderData(Order order) throws FlooringMasteryDataValidationException, FlooringMasteryPersistenceException {
-        List<String> states = getAllStateAB();
-        
-        String message = "";
-        if (order.getCustomerName() == null || order.getCustomerName().trim().isEmpty()){
-            message += "Customer name is required.\n";
-            
-        }
-        if (order.getState().trim().isEmpty() || order.getState() == null) {
-                message += "State is required.\n";
-        }
-        if(states.contains(order.getState())) {
-        }else{
-            message += "Invalid Product Type.\n";
-            throw new FlooringMasteryDataValidationException(message);
-        }
-        if (order.getProductType().trim().isEmpty() || order.getProductType() == null) {
-            message += "Product type is required.\n";
-        }
-
-        if (order.getArea().compareTo(BigDecimal.ZERO) == 0 || order.getArea() == null) {
-            message += "Area square footage is required.";
-        }else if(order.getArea().compareTo(BigDecimal.ZERO) < 0 || order.getArea().compareTo(new BigDecimal("100")) > 0) {
-            message += "Area is invalid not in range.";
-        }
-        
-        if (!message.isEmpty()) {
-                throw new FlooringMasteryDataValidationException(message);
-        }
-}
-    
     
 }

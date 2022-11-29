@@ -29,9 +29,7 @@ public interface FlooringMasteryServiceLayer {
     ArrayList<File> getAllFiles();
     
     List<Tax> getAllTaxes() throws FlooringMasteryPersistenceException;
-    
-    List<String> getAllStateAB() throws FlooringMasteryPersistenceException;
-    
+
     void editOrder(Order editOrder, ArrayList<String> newValues, String fileName) throws FlooringMasteryPersistenceException;
     
     List<String> getAllStates() throws FlooringMasteryPersistenceException;

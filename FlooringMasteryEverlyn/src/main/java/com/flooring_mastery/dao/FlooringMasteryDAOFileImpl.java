@@ -87,17 +87,6 @@ public class FlooringMasteryDAOFileImpl implements FlooringMasteryDAO {
     }
 
     @Override
-    public List<String> getAllStateTax() throws FlooringMasteryPersistenceException{
-        loadTaxes();
-        ArrayList<String> states = new ArrayList<>();
-        List<Tax> list = getAllTaxes();
-        for(Tax tax: list){
-            states.add(tax.getStateAbbreviation());
-        }
-        return states;
-    }
-
-    @Override
     public Tax getTax(String state) throws FlooringMasteryPersistenceException {
         loadTaxes();
         return tax.get(state);
@@ -137,31 +126,31 @@ public class FlooringMasteryDAOFileImpl implements FlooringMasteryDAO {
         return product.get(productType);
     }
 
-    public Order calculateOrderInfo(Order prevOrder, Tax specificTax, Product specificProduct){
-        BigDecimal orderArea = prevOrder.getArea();
+    public Order calculateOrderInfo(Order prev, Tax tax, Product product){
+        BigDecimal orderArea = prev.getArea();
 
-        prevOrder.setTaxRate(specificTax.getTaxRate());
+        prev.setTaxRate(tax.getTaxRate());
 
-        prevOrder.setCostPerSquareFoot(specificProduct.getCostPerSquareFoot());
+        prev.setCostPerSquareFoot(product.getCostPerSquareFoot());
 
-        prevOrder.setLaborCostPerSquareFoot(specificProduct.getLaborCostPerSquareFoot());
+        prev.setLaborCostPerSquareFoot(product.getLaborCostPerSquareFoot());
 
-        BigDecimal materialCost = orderArea.multiply(specificProduct.getCostPerSquareFoot());
-        prevOrder.setMaterialCost(materialCost);
+        BigDecimal mCost = orderArea.multiply(product.getCostPerSquareFoot());
+        prev.setMaterialCost(mCost);
 
-        BigDecimal laborCost = orderArea.multiply(specificProduct.getLaborCostPerSquareFoot());
-        prevOrder.setLaborCost(laborCost);
+        BigDecimal labor = orderArea.multiply(product.getLaborCostPerSquareFoot());
+        prev.setLaborCost(labor);
 
-        BigDecimal costs = materialCost.add(laborCost);
+        BigDecimal costs = mCost.add(labor);
         BigDecimal hundred = new BigDecimal("100");
-        BigDecimal newTaxRate = specificTax.getTaxRate().divide(hundred);
-        BigDecimal theTax = costs.multiply(newTaxRate);
-        prevOrder.setTax(theTax.setScale(2, RoundingMode.HALF_UP));
+        BigDecimal newTaxRate = tax.getTaxRate().divide(hundred);
+        BigDecimal currTax = costs.multiply(newTaxRate);
+        prev.setTax(currTax.setScale(2, RoundingMode.HALF_UP));
 
-        BigDecimal total = materialCost.add(laborCost);
-        BigDecimal grandTotal = total.add(theTax);
-        prevOrder.setTotal(grandTotal.setScale(2, RoundingMode.HALF_UP));
-        return prevOrder;
+        BigDecimal total = mCost.add(labor);
+        BigDecimal finalTotal = total.add(currTax);
+        prev.setTotal(finalTotal.setScale(2, RoundingMode.HALF_UP));
+        return prev;
 
     }
 
@@ -195,7 +184,6 @@ public class FlooringMasteryDAOFileImpl implements FlooringMasteryDAO {
         String[] orderTokens = orderAsText.split(DELIMITER);
 
         String orderId = orderTokens[0];
-        Order orderFromFile = new Order(orderId);
         String customerName = orderTokens[1];
         String state = orderTokens[2];
         BigDecimal taxRate = new BigDecimal(orderTokens[3]);
@@ -331,7 +319,6 @@ public class FlooringMasteryDAOFileImpl implements FlooringMasteryDAO {
         String[] taxTokens = taxAsText.split(DELIMITER);
         String stateAB = taxTokens[0];
 
-        Tax taxFromFile = new Tax(stateAB);
         String stateName = taxTokens[1];
         BigDecimal taxRate = new BigDecimal(taxTokens[2]);
 

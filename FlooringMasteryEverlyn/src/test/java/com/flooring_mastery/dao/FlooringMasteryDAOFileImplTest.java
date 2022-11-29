@@ -1,4 +1,4 @@
-package com.flooring_mastery.service;
+package com.flooring_mastery.dao;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FlooringMasteryServiceLayerImplTest {
+class FlooringMasteryDAOFileImplTest {
 
     @BeforeEach
     void setUp() {
@@ -17,7 +17,11 @@ class FlooringMasteryServiceLayerImplTest {
     }
 
     @Test
-    void createOrder() {
+    void getAllFiles() {
+    }
+
+    @Test
+    void addOrder() {
     }
 
     @Test
@@ -29,27 +33,19 @@ class FlooringMasteryServiceLayerImplTest {
     }
 
     @Test
+    void getAllTaxes() {
+    }
+
+    @Test
+    void getAllStateTax() {
+    }
+
+    @Test
     void getTax() {
     }
 
     @Test
-    void getProduct() {
-    }
-
-    @Test
-    void removeOrder() {
-    }
-
-    @Test
-    void editOrder() {
-    }
-
-    @Test
-    void getAllFiles() {
-    }
-
-    @Test
-    void getAllTaxes() {
+    void getAllProducts() {
     }
 
     @Test
@@ -61,11 +57,19 @@ class FlooringMasteryServiceLayerImplTest {
     }
 
     @Test
-    void getAllProducts() {
+    void getProduct() {
     }
 
     @Test
     void calculateOrderInfo() {
+    }
+
+    @Test
+    void removeOrder() {
+    }
+
+    @Test
+    void editOrder() {
     }
 
     @Test

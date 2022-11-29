@@ -36,7 +36,7 @@ public class FlooringMasteryController {
                 menuSelection = getMenuSelection();
                 switch (menuSelection) {
                     case 1:
-                        listOrders();
+                        displayOrders();
                         break;
                     case 2:
                         createOrder();
@@ -71,7 +71,7 @@ public class FlooringMasteryController {
         System.out.println("Getting errors on this(finish later)");
     }
 
-    private void listOrders() throws FlooringMasteryPersistenceException{
+    private void displayOrders() throws FlooringMasteryPersistenceException{
         view.displayDisplayAllBanner();
         String date = view.getDate();
         ArrayList<File> list = service.getAllFiles();
@@ -89,7 +89,7 @@ public class FlooringMasteryController {
     private void createOrder() throws FlooringMasteryPersistenceException{
         view.displayCreateOrderBanner();
         HashMap<String,Order> dateAndOrder;
-        dateAndOrder = view.getNewOrderInfo(service.getAllStates(),service.getAllStateAB(),service.getAllProducts(), service.getAllProductTypes());
+        dateAndOrder = view.getNewOrderInfo(service.getAllStates(),service.getAllStates(),service.getAllProducts(), service.getAllProductTypes());
         Map.Entry<String,Order> entry = dateAndOrder.entrySet().iterator().next();
         String date = entry.getKey();
         Order newOrder = entry.getValue();

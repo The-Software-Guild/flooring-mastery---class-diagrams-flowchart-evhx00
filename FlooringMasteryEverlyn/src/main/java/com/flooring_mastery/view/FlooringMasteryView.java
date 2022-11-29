@@ -151,7 +151,8 @@ public class FlooringMasteryView {
     }
     
     public void displayCreateSuccessBanner() {
-        io.readString("Order created. Hit enter to continue.");
+        io.readString("Or" +
+                "der created. Hit enter to continue.");
     }
     
     public void displayOrderList(List<Order> orderList) {

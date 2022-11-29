@@ -31,14 +31,6 @@ public class Order{
         this.productType = productType;
         this.area = area;
     }
-    
-    public Order(String orderNumber, String customerName, String state, String productType, BigDecimal area) {
-        this.orderNumber = orderNumber;
-        this.customerName = customerName;
-        this.state = state;
-        this.productType = productType;
-        this.area = area;
-    }
 
     public Order(String orderNumber, String customerName, String state, BigDecimal taxRate, String productType, BigDecimal area, BigDecimal costPerSquareFoot, BigDecimal laborCostPerSquareFoot, BigDecimal materialCost, BigDecimal laborCost, BigDecimal tax, BigDecimal total) {
         this.orderNumber = orderNumber;
