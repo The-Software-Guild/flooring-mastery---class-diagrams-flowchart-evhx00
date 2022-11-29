@@ -97,12 +97,12 @@ public class FlooringMasteryController {
         fileName = "Orders_" + fileName + ".txt";
         String orderNumber = service.generateNextOrderNumber(fileName);
         newOrder.setOrderNumber(orderNumber);
-        Tax specificTax = service.getTax(newOrder.getState());
-        Product specificProduct = service.getProduct(newOrder.getProductType());
-        Order finishedOrder = service.calculateOrderInfo(newOrder,specificTax,specificProduct);
-        view.displayOrder(finishedOrder);
+        Tax tax = service.getTax(newOrder.getState());
+        Product product = service.getProduct(newOrder.getProductType());
+        Order order = service.calculateOrderInfo(newOrder,tax,product);
+        view.displayOrder(order);
         if(view.displayConfirmation("create")){
-            service.createOrder(finishedOrder, fileName);
+            service.createOrder(order, fileName);
             view.displayCreateSuccessBanner();
         }
 
